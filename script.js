@@ -37,82 +37,57 @@ class CardGame {
     createInstructions() {
         return {
             'A': [
-                "Take a deep breath and do 10 jumping jacks! 🏃‍♀️",
-                "Share your favorite memory from this week! 💭",
-                "Do your best impression of your favorite animal! 🐾",
-                "Name 5 things you're grateful for right now! 🙏"
+                "Circle jerk race - grab the cock of your bud on your left. Everyone has to jerk off. Person who drew the card is the first one to stop, then the next person on his left. The next person can’t stop until the guy before has stopped, and you have to go as fast as the first person jerking off.",
+                "Cum now or pass  (only 3 passes allowed)"
             ],
             '2': [
-                "Find someone and give them a genuine compliment! 💝",
-                "Do 5 push-ups (or modified push-ups)! 💪",
-                "Text someone you haven't talked to in a while! 📱",
-                "Share an interesting fact you know! 🧠"
+                "Choose two buds to jerk each other off for 20 seconds",
+                "Jerk fast for 30 seconds"
             ],
             '3': [
-                "Dance for 30 seconds to your favorite song! 💃",
-                "Write down 3 goals for tomorrow! ✍️",
-                "Do a 1-minute plank (or as long as you can)! 🏋️‍♀️",
-                "Tell everyone your favorite joke! 😂"
+                "Jerk the guy to the right slow and steady for 30 seconds",
+                "Jerk slow and steady for 30 seconds"
+               
             ],
             '4': [
-                "Do 10 squats while humming your favorite tune! 🎵",
-                "Draw a quick doodle of how you're feeling! 🎨",
-                "Share what superpower you'd want and why! 🦸‍♀️",
-                "Organize one small area around you! 🧹"
+                "Choose another to edge with you and focus on cockhead for 20 seconds",
+                "Edge your cockhead for 20 seconds"
             ],
             '5': [
-                "Take 5 deep breaths and stretch your arms up high! 🧘‍♀️",
-                "List 5 countries you'd love to visit! 🌍",
-                "Do lunges for 30 seconds! 🏃‍♂️",
-                "Share your dream job from when you were a kid! 👶"
+                "Everyone jerks FAST and HARD for 20 seconds",
+                "Jerk your dick fast and hard for 15 seconds"
             ],
             '6': [
-                "Do 6 burpees (or modify as needed)! 💥",
-                "Name your top 3 favorite movies and why! 🎬",
-                "Practice balancing on one foot for 30 seconds! ⚖️",
-                "Share the best advice you've ever received! 💡"
+                "Truth - choose someone to answer a truth of your choosing",
+                "Wiggle penis, slap against hand 9 times"
             ],
             '7': [
-                "Do 7 different yoga poses (or stretches)! 🧘",
-                "Share 7 words that describe you perfectly! 🏷️",
-                "Do jumping jacks for 45 seconds! 🤸‍♀️",
-                "Tell everyone about your favorite book or podcast! 📚"
+                "Dare - choose someone to do a dare of your choosing",
+                "On all fours, slap ass and jerk for 35 seconds medium pace"
             ],
             '8': [
-                "Do mountain climbers for 30 seconds! 🏔️",
-                "Share what you'd do with $1 million! 💰",
-                "Practice your best dance move 8 times! 🕺",
-                "Name 8 things that make you happy! 😊"
+                "Bate - start jerking and you can’t stop until the next 8 comes out",
+                "Edge, Eat Precum"
             ],
             '9': [
-                "Do 9 sit-ups or crunches! 💪",
-                "Share your most embarrassing but funny moment! 😅",
-                "Hold a wall sit for 30 seconds! 🧱",
-                "Describe your perfect day in detail! ☀️"
+                "Post a selfie - take a pic of your dick and upload it somewhere online",
+                "Make a 30 second wank video"
             ],
             '10': [
-                "Do 10 high knees in place! 🦵",
-                "Share 10 things on your bucket list! 📝",
-                "Do arm circles for 30 seconds each direction! 🔄",
-                "Tell everyone about your hidden talent! ⭐"
+                "Be a fitness instructor and give a command for two sets of ten (jumping jacks, situps, etc)",
+                "10 jumping jacks and 2 edges"
             ],
             'J': [
-                "Be the DJ! Pick the next song everyone listens to! 🎧",
-                "Lead everyone in a 2-minute meditation! 🧘‍♂️",
-                "Teach someone something new you know! 👨‍🏫",
-                "Do your best celebrity impression! 🌟"
+                "Jerk off bud - whenever you have to jerk, your bud as too as well. Lasts until the next J is chosen.",
+                "Corkscrew jerk for 20 seconds"
             ],
             'Q': [
-                "You're the Queen/King! Give everyone else a fun task! 👑",
-                "Share your most valuable life lesson! 💎",
-                "Lead a group exercise for 2 minutes! 👥",
-                "Tell the story of your greatest achievement! 🏆"
+                "Jerk off bitch - whenever you get chosen to jerk off your bitch has to do it instead. Lasts until the next Q is chosen",
+                "Feather touch, slow movemenets of arousal"
             ],
             'K': [
-                "You rule the kingdom! Create a new rule for the next 5 minutes! 🏰",
-                "Share what advice you'd give your younger self! 🔮",
-                "Lead everyone in your favorite warm-up routine! 🔥",
-                "Describe what makes you feel most confident! 💪"
+                "Everyone except you has to jerk off for 10 seconds",
+                "Your favorite stroke for 45 seconds"
             ]
         };
     }
