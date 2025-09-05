@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Command</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🃏 Card Command</h1>
+        
+        <div id="card" class="card" style="display: none;">
+            <div id="cardValue"></div>
+            <div id="cardSuit" class="suit"></div>
+        </div>
+        
+        <div id="instruction" class="instruction hidden">
+            Click "Draw Card" to get your first command!
+        </div>
+        
+        <button id="drawBtn" class="draw-btn">Draw Card</button>
+        
+        <div class="stats">
+            <div>Cards drawn: <span id="cardCount">0</span></div>
+            <div>Deck remaining: <span id="deckCount">52</span></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
