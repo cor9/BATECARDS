@@ -3,8 +3,37 @@ class CardGame {
         this.deck = this.createDeck();
         this.drawnCount = 0;
         this.instructions = this.createInstructions();
+        this.gameMode = null; // 'group' or 'solo'
         this.initializeElements();
         this.bindEvents();
+    }
+
+    getCardImageName(value, suitName) {
+        // Only return image names for cards we have (A, K, J)
+        if (!['A', 'K', 'J'].includes(value)) {
+            return null; // No image available
+        }
+        
+        // Convert suit name to letter
+        const suitLetter = {
+            'hearts': 'h',
+            'diamonds': 'd', 
+            'spades': 's',
+            'clubs': 'c'
+        }[suitName];
+        
+        // Convert value to letter  
+        const valueLetter = value.toLowerCase();
+        
+        return `${valueLetter}${suitLetter}.jpg`;
+    }
+
+    showTextCard(card) {
+        // Fallback to original text display
+        this.cardElement.innerHTML = `
+            <div class="card-value">${card.value}</div>
+            <div class="card-suit">${card.suit}</div>
+        `;
     }
 
     createDeck() {
@@ -13,15 +42,18 @@ class CardGame {
         const suitNames = ['spades', 'hearts', 'diamonds', 'clubs'];
         
         let deck = [];
-        suits.forEach((suit, suitIndex) => {
-            values.forEach(value => {
-                deck.push({
-                    value: value,
-                    suit: suit,
-                    suitName: suitNames[suitIndex]
+        // Create two complete decks (104 cards total)
+        for (let deckNum = 0; deckNum < 2; deckNum++) {
+            suits.forEach((suit, suitIndex) => {
+                values.forEach(value => {
+                    deck.push({
+                        value: value,
+                        suit: suit,
+                        suitName: suitNames[suitIndex]
+                    });
                 });
             });
-        });
+        }
         
         return this.shuffleDeck(deck);
     }
@@ -93,6 +125,14 @@ class CardGame {
     }
 
     initializeElements() {
+        // Mode selection elements
+        this.modeSelection = document.getElementById('modeSelection');
+        this.gameScreen = document.getElementById('gameScreen');
+        this.groupModeBtn = document.getElementById('groupMode');
+        this.soloModeBtn = document.getElementById('soloMode');
+        this.backToModeBtn = document.getElementById('backToMode');
+        
+        // Regular game elements
         this.cardElement = document.getElementById('card');
         this.cardValue = document.getElementById('cardValue');
         this.cardSuit = document.getElementById('cardSuit');
@@ -100,10 +140,25 @@ class CardGame {
         this.drawBtn = document.getElementById('drawBtn');
         this.cardCount = document.getElementById('cardCount');
         this.deckCount = document.getElementById('deckCount');
+        
+        // Overview elements
+        this.gameOverview = document.getElementById('gameOverview');
+        this.overviewTitle = document.getElementById('overviewTitle');
+        this.overviewText = document.getElementById('overviewText');
+        this.closeOverview = document.getElementById('closeOverview');
     }
 
     bindEvents() {
+        // Mode selection events
+        this.groupModeBtn.addEventListener('click', () => this.selectMode('group'));
+        this.soloModeBtn.addEventListener('click', () => this.selectMode('solo'));
+        this.backToModeBtn.addEventListener('click', () => this.backToModeSelection());
+        
+        // Regular game events
         this.drawBtn.addEventListener('click', () => this.drawCard());
+        
+        // Overview events
+        this.closeOverview.addEventListener('click', () => this.closeGameOverview());
     }
 
     drawCard() {
@@ -125,19 +180,31 @@ class CardGame {
         this.cardElement.classList.add('flip-animation');
         
         setTimeout(() => {
-            // Update card display
-            this.cardValue.textContent = card.value;
-            this.cardSuit.textContent = card.suit;
+            // Update card display with image
+            const cardImage = document.createElement('img');
+            cardImage.src = `cards/${card.value.toLowerCase()}_${card.suitName}.png`;
+            cardImage.alt = `${card.value} of ${card.suitName}`;
+            cardImage.className = 'card-image';
+            
+            // Clear previous content and add image
+            this.cardElement.innerHTML = '';
+            this.cardElement.appendChild(cardImage);
             this.cardElement.className = `card ${card.suitName}`;
             this.cardElement.style.display = 'flex';
 
-            // Get random instruction for this card value
-            const possibleInstructions = this.instructions[card.value];
-            const randomInstruction = possibleInstructions[Math.floor(Math.random() * possibleInstructions.length)];
+            // Get instruction for this card value based on game mode
+            const instructions = this.instructions[card.value];
+            let selectedInstruction;
+            
+            if (this.gameMode === 'group') {
+                selectedInstruction = instructions[0]; // Group instruction
+            } else if (this.gameMode === 'solo') {
+                selectedInstruction = instructions[1]; // Solo instruction  
+            }
             
             // Show instruction with delay
             setTimeout(() => {
-                this.instruction.textContent = randomInstruction;
+                this.instruction.textContent = selectedInstruction;
                 this.instruction.classList.remove('hidden');
                 this.instruction.classList.add('visible');
             }, 200);
@@ -148,11 +215,89 @@ class CardGame {
 
         }, 300);
     }
+
+    selectMode(mode) {
+        this.gameMode = mode;
+        
+        // Hide mode selection
+        this.modeSelection.classList.add('hidden');
+        
+        // Show regular game screen
+        this.gameScreen.classList.remove('hidden');
+        this.gameScreen.classList.add('visible');
+        
+        // Apply theme class
+        this.gameScreen.className = 'game-screen visible';
+        if (mode === 'group') {
+            this.gameScreen.classList.add('group-theme');
+        } else if (mode === 'solo') {
+            this.gameScreen.classList.add('solo-theme');
+        }
+        
+        // Show appropriate overview
+        this.showGameOverview(mode);
+        
+        // Update instruction text based on mode
+        const modeText = mode === 'group' ? 'group' : 'solo';
+        this.instruction.textContent = `Click "Draw Card" to get your first ${modeText} command!`;
+    }
+
+    backToModeSelection() {
+        // Hide game screen and show mode selection
+        this.gameScreen.classList.add('hidden');
+        this.gameScreen.classList.remove('visible');
+        this.modeSelection.classList.remove('hidden');
+        
+        // Reset game state
+        this.deck = this.createDeck();
+        this.drawnCount = 0;
+        this.cardElement.style.display = 'none';
+        this.cardCount.textContent = '0';
+        this.deckCount.textContent = '104';
+        this.gameMode = null;
+    }
+
+    // Overview Methods
+    showGameOverview(mode) {
+        this.overviewTitle.textContent = mode === 'group' ? 'Group Game Overview' : 'Solo Game Overview';
+        
+        // Apply theme class to overview
+        this.gameOverview.className = 'game-overview';
+        if (mode === 'group') {
+            this.gameOverview.classList.add('group-theme');
+        } else if (mode === 'solo') {
+            this.gameOverview.classList.add('solo-theme');
+        }
+        
+        // Apply theme class to header
+        this.gameOverview.querySelector('.overview-header').className = 'overview-header';
+        if (mode === 'group') {
+            this.gameOverview.querySelector('.overview-header').classList.add('group-theme');
+        } else if (mode === 'solo') {
+            this.gameOverview.querySelector('.overview-header').classList.add('solo-theme');
+        }
+        
+        // Overview content
+        this.overviewText.innerHTML = `
+            <p><strong>Game Mode:</strong> ${mode === 'group' ? 'Group' : 'Solo'}</p>
+            <p><strong>How to Play:</strong></p>
+            <ul>
+                <li>Draw cards to get random commands</li>
+                <li>Follow the instructions shown</li>
+                <li>Have fun with friends or by yourself!</li>
+            </ul>
+            <p><strong>Instructions:</strong> Each card has a unique activity to keep things interesting!</p>
+        `;
+        
+        this.gameOverview.style.display = 'block';
+    }
+
+    closeGameOverview() {
+        this.gameOverview.style.display = 'none';
+    }
 }
 
 // Initialize the game when page loads
 document.addEventListener('DOMContentLoaded', () => {
     new CardGame();
 });
-
-
