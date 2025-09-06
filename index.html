@@ -10,24 +10,46 @@
     <div class="container">
         <h1>🃏 BATECARDS</h1>
         
-        <div id="card" class="card" style="display: none;">
-            <div id="cardValue"></div>
-            <div id="cardSuit" class="suit"></div>
+        <!-- Mode Selection Screen -->
+        <div id="modeSelection" class="mode-selection">
+            <h2>Choose Game Mode</h2>
+            <button id="groupMode" class="mode-btn group-theme">Group Mode</button>
+            <button id="soloMode" class="mode-btn solo-theme">Solo Mode</button>
         </div>
         
-        <div id="instruction" class="instruction hidden">
-            Click "Draw Card" to get your first command!
+        <!-- Main Game Screen -->
+        <div id="gameScreen" class="game-screen hidden">
+            <button id="backToMode" class="back-btn">← Back to Mode Selection</button>
+            
+            <div id="card" class="card" style="display: none;">
+                <div id="cardValue" class="card-value"></div>
+                <div id="cardSuit" class="card-suit"></div>
+            </div>
+            
+            <div id="instruction" class="instruction hidden">
+                Click "Draw Card" to get your first command!
+            </div>
+            
+            <button id="drawBtn" class="draw-btn">Draw Card</button>
+            
+            <div class="stats">
+                <div>Cards drawn: <span id="cardCount">0</span></div>
+                <div>Deck remaining: <span id="deckCount">104</span></div>
+            </div>
         </div>
         
-        <button id="drawBtn" class="draw-btn">Draw Card</button>
-        
-        <div class="stats">
-            <div>Cards drawn: <span id="cardCount">0</span></div>
-            <div>Deck remaining: <span id="deckCount">52</span></div>
+        <!-- Game Overview Modal -->
+        <div id="gameOverview" class="game-overview" style="display: none;">
+            <div class="overview-header">
+                <h3 id="overviewTitle">Game Overview</h3>
+                <button id="closeOverview" class="close-btn">×</button>
+            </div>
+            <div id="overviewText" class="overview-content">
+                <!-- Content filled by JavaScript -->
+            </div>
         </div>
     </div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
-
